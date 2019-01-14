@@ -67,6 +67,7 @@ namespace lpr_ncs2 {
          */
         void init();
         void init_ncs();
+        void init_lpr();
 
 
         /*!

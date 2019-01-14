@@ -130,17 +130,26 @@ catkin_package(
 find_package( OpenCV REQUIRED )
 include_directories(
 include
+        include/lpr_utils
         ${Boost_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
 )
 
-file(GLOB extra_files  ./src/*.cpp ./src/*.c)
+file(GLOB extra_files  ./src/*.cpp ./src/*.c ./src/lpr_utils/*.cpp)
 
 ## Declare a C++ library
 add_library(${PROJECT_NAME}_lib
         src/lpr_ncs2.cpp
         src/ncs_util.cpp
+        src/lpr_utils/CNNRecognizer.cpp
+        src/lpr_utils/FastDeskew.cpp
+        src/lpr_utils/FineMapping.cpp
+        src/lpr_utils/Pipeline.cpp
+        src/lpr_utils/PlateDetection.cpp
+        src/lpr_utils/PlateSegmentation.cpp
+        src/lpr_utils/Recognizer.cpp
+        src/lpr_utils/SegmentationFreeRecognizer.cpp
         ${extra_files}
 )
 

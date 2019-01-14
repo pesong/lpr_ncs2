@@ -1,4 +1,1 @@
-/home/pesong/tools/clion-2018.2.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /dl/ros/License_Plate_Recognition_ros_ncsv2
--- Configuring done
--- Generating done
--- Build files have been written to: /dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug
+CMakeLists.txt not found in /dl/ros/License_Plate_Recognition_ros_ncsv2 Select CMakeLists.txt file...
