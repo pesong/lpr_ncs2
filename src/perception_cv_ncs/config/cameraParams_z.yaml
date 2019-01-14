@@ -1,0 +1,13 @@
+camera:
+  camera_position: 0.6
+  fx: 476.398
+  fy: 476.397
+  cx: 320.279
+  cy: 245.871
+  roll: 0.10
+  pitch: -0.10
+  yaw: 0.05
+  T1: 0
+  T2: 0
+  T3: 0
+
