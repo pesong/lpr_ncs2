@@ -150,59 +150,275 @@ src/perception_cv_ncs/main.cc.s:
 	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.s
 .PHONY : src/perception_cv_ncs/main.cc.s
 
-src/perception_cv_ncs/src/lpr_ncs2.o: src/perception_cv_ncs/src/lpr_ncs2.cpp.o
+src/perception_cv_ncs/src/lpr_ncs.o: src/perception_cv_ncs/src/lpr_ncs.cpp.o
 
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.o
-
-# target to build an object file
-src/perception_cv_ncs/src/lpr_ncs2.cpp.o:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs2.cpp.o
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.cpp.o
-
-src/perception_cv_ncs/src/lpr_ncs2.i: src/perception_cv_ncs/src/lpr_ncs2.cpp.i
-
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.i
-
-# target to preprocess a source file
-src/perception_cv_ncs/src/lpr_ncs2.cpp.i:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs2.cpp.i
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.cpp.i
-
-src/perception_cv_ncs/src/lpr_ncs2.s: src/perception_cv_ncs/src/lpr_ncs2.cpp.s
-
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.s
-
-# target to generate assembly for a file
-src/perception_cv_ncs/src/lpr_ncs2.cpp.s:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs2.cpp.s
-.PHONY : src/perception_cv_ncs/src/lpr_ncs2.cpp.s
-
-src/perception_cv_ncs/src/ncs_util.o: src/perception_cv_ncs/src/ncs_util.cpp.o
-
-.PHONY : src/perception_cv_ncs/src/ncs_util.o
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.o
 
 # target to build an object file
-src/perception_cv_ncs/src/ncs_util.cpp.o:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_util.cpp.o
-.PHONY : src/perception_cv_ncs/src/ncs_util.cpp.o
+src/perception_cv_ncs/src/lpr_ncs.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.cpp.o
 
-src/perception_cv_ncs/src/ncs_util.i: src/perception_cv_ncs/src/ncs_util.cpp.i
+src/perception_cv_ncs/src/lpr_ncs.i: src/perception_cv_ncs/src/lpr_ncs.cpp.i
 
-.PHONY : src/perception_cv_ncs/src/ncs_util.i
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.i
 
 # target to preprocess a source file
-src/perception_cv_ncs/src/ncs_util.cpp.i:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_util.cpp.i
-.PHONY : src/perception_cv_ncs/src/ncs_util.cpp.i
+src/perception_cv_ncs/src/lpr_ncs.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.cpp.i
 
-src/perception_cv_ncs/src/ncs_util.s: src/perception_cv_ncs/src/ncs_util.cpp.s
+src/perception_cv_ncs/src/lpr_ncs.s: src/perception_cv_ncs/src/lpr_ncs.cpp.s
 
-.PHONY : src/perception_cv_ncs/src/ncs_util.s
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.s
 
 # target to generate assembly for a file
-src/perception_cv_ncs/src/ncs_util.cpp.s:
-	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_util.cpp.s
-.PHONY : src/perception_cv_ncs/src/ncs_util.cpp.s
+src/perception_cv_ncs/src/lpr_ncs.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_ncs.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o: src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.i: src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.s: src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.o: src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.i: src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.s: src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/FineMapping.o: src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/FineMapping.i: src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/FineMapping.s: src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/Pipeline.o: src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/Pipeline.i: src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/Pipeline.s: src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.o: src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.i: src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.s: src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.o: src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.i: src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.s: src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/Recognizer.o: src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/Recognizer.i: src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/Recognizer.s: src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.s
+
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.o: src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o
+
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.i: src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.i
+
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.s: src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s
+
+src/perception_cv_ncs/src/ncs_utils/ncs_util.o: src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.o
+
+# target to build an object file
+src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o
+
+src/perception_cv_ncs/src/ncs_utils/ncs_util.i: src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.i
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.i
+
+src/perception_cv_ncs/src/ncs_utils/ncs_util.s: src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.s
+.PHONY : src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.s
 
 # Help Target
 help:
@@ -216,12 +432,36 @@ help:
 	@echo "... src/perception_cv_ncs/main.o"
 	@echo "... src/perception_cv_ncs/main.i"
 	@echo "... src/perception_cv_ncs/main.s"
-	@echo "... src/perception_cv_ncs/src/lpr_ncs2.o"
-	@echo "... src/perception_cv_ncs/src/lpr_ncs2.i"
-	@echo "... src/perception_cv_ncs/src/lpr_ncs2.s"
-	@echo "... src/perception_cv_ncs/src/ncs_util.o"
-	@echo "... src/perception_cv_ncs/src/ncs_util.i"
-	@echo "... src/perception_cv_ncs/src/ncs_util.s"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs.o"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs.i"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FastDeskew.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FastDeskew.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FastDeskew.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FineMapping.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FineMapping.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/FineMapping.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Pipeline.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Pipeline.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Pipeline.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateDetection.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateDetection.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateDetection.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Recognizer.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Recognizer.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/Recognizer.s"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.o"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.i"
+	@echo "... src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.s"
+	@echo "... src/perception_cv_ncs/src/ncs_utils/ncs_util.o"
+	@echo "... src/perception_cv_ncs/src/ncs_utils/ncs_util.i"
+	@echo "... src/perception_cv_ncs/src/ncs_utils/ncs_util.s"
 .PHONY : help
 
 

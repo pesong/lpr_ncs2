@@ -41,7 +41,7 @@ extern struct ncFifoHandle_t* inFifoHandlePtr_det;
 extern struct ncFifoHandle_t* outFifoHandlePtr_det;
 
 extern int numClasses_;
-extern float ssd_threshold;
+extern float det_threshold;
 
 // 16 bits.  will use this to store half precision floats since C++ has no
 // built in support for it.

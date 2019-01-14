@@ -44,7 +44,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include/lpr_ncs2"/>
 					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -68,7 +72,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include/lpr_ncs2"/>
 					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include"/>
+					<Add directory="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -86,28 +94,91 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_ncs2.hpp">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include/lpr_ncs2/BoundingBox.h">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/ncs_util.h">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include/lpr_ncs2/BoundingBoxes.h">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/stb_image.h">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_ncs.hpp">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/stb_image_resize.h">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/CNNRecognizer.h">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/stb_image_write.h">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/FastDeskew.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/FineMapping.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/Pipeline.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/PlateDetection.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/PlateInfo.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/PlateSegmentation.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/Recognizer.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/SegmentationFreeRecognizer.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/niBlackThreshold.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/util.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/ncs_utils/ncs_util.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/ncs_utils/stb_image.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/ncs_utils/stb_image_resize.h">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/ncs_utils/stb_image_write.h">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/main.cc">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs2.cpp">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs.cpp">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
-		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_util.cpp">
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/FastDeskew.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/FineMapping.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/Pipeline.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/PlateDetection.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/CMakeLists.txt">

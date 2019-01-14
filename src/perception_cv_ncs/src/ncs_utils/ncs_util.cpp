@@ -4,12 +4,12 @@
 
 #include <math.h>
 
-#include "ncs_util.h"
+#include "ncs_utils/ncs_util.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "ncs_utils/stb_image.h"
 
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include "stb_image_resize.h"
+#include "ncs_utils/stb_image_resize.h"
 
 
 
@@ -30,7 +30,7 @@ struct ncFifoHandle_t* inFifoHandlePtr_det;
 struct ncFifoHandle_t* outFifoHandlePtr_det;
 
 int numClasses_;
-float ssd_threshold;
+float det_threshold;
 
 std::map<int, std::string> LABELS = {{0,"background"}, {1, "person"}, {2, "car"}, {3, "bicycle"}};
 
@@ -284,7 +284,7 @@ void ssd_result_process(float *output, std::vector<Box> &result, cv::Mat &image,
 ////filter some boxes of which score lower than threshold
 bool Overlay_on_image(cv::Mat &image, float *object_info, int Length, Box &single_box) {
     // int min_score_percent = 60;
-    int min_score_percent = int(ssd_threshold * 100);
+    int min_score_percent = int(det_threshold * 100);
     int source_image_width = image.cols;
     int source_image_height = image.rows;
     int base_index = 0;

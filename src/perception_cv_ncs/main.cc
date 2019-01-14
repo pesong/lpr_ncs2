@@ -1,7 +1,7 @@
 //
 // Created by pesong on 18-9-5.
 //
-#include "lpr_ncs2.hpp"
+#include "lpr_ncs.hpp"
 
 int main(int argc, char *argv[]) {
     ros::init(argc, argv, "lpr_ncs2");

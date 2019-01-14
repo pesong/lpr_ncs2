@@ -12,6 +12,9 @@ namespace pr {
         cv::MatSize mtsize = code_table.size;
         int sequencelength = mtsize[2];
         int labellength = mtsize[1];
+
+        printf("label: %d, sequence: %d \n", labellength, sequencelength);
+
         cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
         std::string name = "";
         std::vector<int> seq(sequencelength);

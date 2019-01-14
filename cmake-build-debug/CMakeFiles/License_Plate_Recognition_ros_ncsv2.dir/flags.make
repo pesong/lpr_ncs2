@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include 
+CXX_INCLUDES = -I/dl/ros/License_Plate_Recognition_ros_ncsv2/devel -I/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include -I/dl/ros/License_Plate_Recognition_ros_ncsv2/devel/include/lpr_ncs2 -I/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include -I/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils 
 

@@ -26,7 +26,7 @@
 #include <lpr_ncs2/BoundingBoxes.h>
 
 // NCS
-#include "ncs_util.h"
+#include "ncs_utils/ncs_util.h"
 #include <mvnc.h>
 
 
@@ -88,12 +88,9 @@ namespace lpr_ncs2 {
         void *detThread();
         void *publishThread();
 
-        //! Class labels.
-        int numClasses_;
-        std::vector <std::string> classLabels_;
 
         //! thread
-        float ssd_threshold;
+        float det_threshold;
 
         void infer();
         cv::Mat getCVImage();

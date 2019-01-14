@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mvnc.h>
-#include "ncs_util.h"
-#include "lpr_ncs2.hpp"
+#include "ncs_utils/ncs_util.h"
+#include "lpr_ncs.hpp"
 
 #include "SegmentationFreeRecognizer.h"
 #include "Pipeline.h"
@@ -64,11 +64,9 @@ namespace lpr_ncs2 {
         nodeHandle_.param("backbone_graph/target_h", target_h, 300);
         nodeHandle_.param("backbone_graph/target_w", target_w, 300);
         nodeHandle_.param("camera/image_flip", flip_flag, false);
-        nodeHandle_.param("ssd_model/detection_classes/names", classLabels_, std::vector<std::string>(0));
         nodeHandle_.param("ssd_model/threshold/value", thresh, (float) 0.3);
 
-        numClasses_ = classLabels_.size();
-        ssd_threshold = thresh;
+        det_threshold = thresh;
 
         strcpy(GRAPH_FILE_NAME_DET, (graphPath + "/" + graphModelDet).c_str());
 
@@ -106,12 +104,10 @@ namespace lpr_ncs2 {
 
             // Now read in a graph file from disk to memory buffer and
             // then allocate the graph based on the file we read
-
             void* graphFileBuf_det = LoadFile(GRAPH_FILE_NAME_DET, &graphFileLenDet);
             retCodeDet = ncGraphAllocateWithFifos(deviceHandlePtr, graphHandlePtr_det, graphFileBuf_det, graphFileLenDet, &inFifoHandlePtr_det, &outFifoHandlePtr_det);
 
             free(graphFileBuf_det);
-
 
             if (retCodeDet != NC_OK)
             {   // error allocating graph or fifos
@@ -369,7 +365,7 @@ namespace lpr_ncs2 {
 
                 //post process
                 std::vector <Box> resultBoxes;
-                ssd_result_process(resultDataFP32Ptr, resultBoxes, ROS_img_resized, numClasses_);
+//                ssd_result_process(resultDataFP32Ptr, resultBoxes, ROS_img_resized, numClasses_);
                 printf("FPS:%.1f\n", fps_);
             }
 //            delete imageBufFP32Ptr;

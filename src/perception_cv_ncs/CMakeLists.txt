@@ -140,8 +140,8 @@ file(GLOB extra_files  ./src/*.cpp ./src/*.c ./src/lpr_utils/*.cpp)
 
 ## Declare a C++ library
 add_library(${PROJECT_NAME}_lib
-        src/lpr_ncs2.cpp
-        src/ncs_util.cpp
+        src/lpr_ncs.cpp
+        src/ncs_utils/ncs_util.cpp
         src/lpr_utils/CNNRecognizer.cpp
         src/lpr_utils/FastDeskew.cpp
         src/lpr_utils/FineMapping.cpp
