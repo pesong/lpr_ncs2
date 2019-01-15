@@ -76,9 +76,9 @@ namespace lpr_ncs2 {
          */
         void imageCallback(const sensor_msgs::ImageConstPtr& msg);
 
-        cv::Mat ncs_result_process(float* output, int h, int w);
-
         cv::Mat camImageCopy_;
+        std::vector<cv::Mat> plate_imgs_;
+
         std::thread inferThread_;
 
         bool imageStatus_ = false;
