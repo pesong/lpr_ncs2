@@ -1,22 +1,3 @@
-#include <ros/ros.h>
-#include <image_transport/image_transport.h>
-#include <opencv2/highgui/highgui.hpp>
-#include <cv_bridge/cv_bridge.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <mvnc.h>
-#include "ncs_utils/ncs_util.h"
-
-#include "SegmentationFreeRecognizer.h"
-#include "Pipeline.h"
-#include "PlateInfo.h"
-
-#include <iostream>
-#include <boost/algorithm/string.hpp>
-
-// Check for xServer
-#include <X11/Xlib.h>
-
 #include "lpr_ncs.hpp"
 
 
@@ -55,14 +36,12 @@ namespace lpr_ncs {
 
         // load param
         bool flip_flag;
-        float thresh;
         std::string graphPath;
         std::string graphModelDet;
         std::string graphModelFine;
 
         GRAPH_FILE_NAME_DET = new char[graphPath.length() + 1];
         GRAPH_FILE_NAME_FINE = new char[graphPath.length() + 1];
-
 
         nodeHandle_.param("backbone_graph/graph_file/det_graph_name", graphModelDet, std::string("lpr_ncs_v2.graph"));
         nodeHandle_.param("backbone_graph/graph_file/horizon_fine_graph_name", graphModelFine, std::string("horizon_fine_v2.graph"));
@@ -71,13 +50,11 @@ namespace lpr_ncs {
         nodeHandle_.param("backbone_graph/target_h", target_h, 300);
         nodeHandle_.param("backbone_graph/target_w", target_w, 300);
         nodeHandle_.param("camera/image_flip", flip_flag, false);
-        nodeHandle_.param("ssd_model/threshold/value", thresh, (float) 0.3);
+        nodeHandle_.param("backbone_graph/threshold", det_threshold, (float) 0.9);
 
-        det_threshold = thresh;
 
         strcpy(GRAPH_FILE_NAME_DET, (graphPath + "/" + graphModelDet).c_str());
         strcpy(GRAPH_FILE_NAME_FINE, (graphPath + "/" + graphModelFine).c_str());
-
 
         // Try to create the first Neural Compute device (at index zero)
         retCodeDet = ncDeviceCreate(0, &deviceHandlePtr);
@@ -100,7 +77,8 @@ namespace lpr_ncs {
         printf("Successfully opened NC device!\n");
 
         // Create the graph
-        retCodeDet = ncGraphCreate("Mobilenet Detection Graph", &graphHandlePtr_det);
+        retCodeFine = ncGraphCreate("refine Graph", &graphHandlePtr_fine);
+        retCodeDet = ncGraphCreate("lpr Detection Graph", &graphHandlePtr_det);
 
         if (retCodeDet != NC_OK)
         {   // error allocating graph
@@ -108,15 +86,30 @@ namespace lpr_ncs {
             printf("Error from ncGraphCreate is: %d\n", retCodeDet);
         }else { // successfully created graph.  Now we need to destory it when finished with it.
             // Now we need to allocate graph and create and in/out fifos
+            inFifoHandlePtr_fine = NULL;
+            outFifoHandlePtr_fine = NULL;
             inFifoHandlePtr_det = NULL;
             outFifoHandlePtr_det = NULL;
 
             // Now read in a graph file from disk to memory buffer and
             // then allocate the graph based on the file we read
-            void* graphFileBuf_det = LoadFile(GRAPH_FILE_NAME_FINE, &graphFileLenDet);
+            void* graphFileBuf_fine = LoadFile(GRAPH_FILE_NAME_FINE, &graphFileLenFine);
+            retCodeFine = ncGraphAllocateWithFifos(deviceHandlePtr, graphHandlePtr_fine, graphFileBuf_fine, graphFileLenFine, &inFifoHandlePtr_fine, &outFifoHandlePtr_fine);
+
+            void* graphFileBuf_det = LoadFile(GRAPH_FILE_NAME_DET, &graphFileLenDet);
             retCodeDet = ncGraphAllocateWithFifos(deviceHandlePtr, graphHandlePtr_det, graphFileBuf_det, graphFileLenDet, &inFifoHandlePtr_det, &outFifoHandlePtr_det);
 
+            free(graphFileBuf_fine);
             free(graphFileBuf_det);
+
+            if (retCodeFine != NC_OK)
+            {   // error allocating graph or fifos
+                printf("Could not allocate fine graph with fifos.\n");
+                printf("Error from ncGraphAllocateWithFifos is: %d\n", retCodeFine);
+            }else{
+                // Now graphHandle is ready to go we it can now process inferences.
+                printf("Successfully allocated graph for %s\n", GRAPH_FILE_NAME_FINE);
+            }
 
             if (retCodeDet != NC_OK)
             {   // error allocating graph or fifos
@@ -124,13 +117,13 @@ namespace lpr_ncs {
                 printf("Error from ncGraphAllocateWithFifos is: %d\n", retCodeDet);
             }else{
                 // Now graphHandle is ready to go we it can now process inferences.
-                printf("Successfully allocated graph for %s\n", GRAPH_FILE_NAME_FINE);
+                printf("Successfully allocated graph for %s\n", GRAPH_FILE_NAME_DET);
             }
 
         }
     }
 
-    // 对ros节点进行初始化
+    // init ros node
     void LPR_NCS::init() {
         ROS_INFO("[LPR_NCS] init().");
 
@@ -138,7 +131,7 @@ namespace lpr_ncs {
         std::string cameraTopicName;
         std::string OutTopicName;
         nodeHandle_.param("subscribers/camera_reading/topic", cameraTopicName, std::string("/camera/image"));
-        nodeHandle_.param("subscribers/seg_image/topic", OutTopicName, std::string("/seg_ros/out_image"));
+        nodeHandle_.param("subscribers/seg_image/topic", OutTopicName, std::string("/camera/lpr_out"));
         // infer thread
         imageSubscriber_ = imageTransport_.subscribe(cameraTopicName, 1, &LPR_NCS::imageCallback, this);
         imageSegPub_ = imageTransport_.advertise(OutTopicName, 1);
@@ -177,7 +170,6 @@ namespace lpr_ncs {
         }
         cv::Mat frame;
         cap.read(frame);
-        printf("begin plate infer");
         plates_infer(frame);
 
 
@@ -198,48 +190,105 @@ namespace lpr_ncs {
             image_finemapping = prc.fineMapping->FineMappingVertical(image_finemapping);
             image_finemapping = pr::fastdeskew(image_finemapping, 5);
 
-
-
             //Segmentation-free
-//            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
+            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
 
             // movidius infer: fine horizon
-            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
+//            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
 
-            cv::imshow("fine",image_finemapping);
-            cv::waitKey(1);
+//            cv::imshow("fine",image_finemapping);
+//            cv::waitKey(1);
 
             cv::resize(image_finemapping, image_finemapping, cv::Size(136+HorizontalPadding, 36));
             plateinfo.setPlateImage(image_finemapping);
+
             std::pair<std::string,float> res = prc.segmentationFreeRecognizer->SegmentationFreeForSinglePlate(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+
+//            std::pair<std::string,float> res = infer_det(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+
             plateinfo.confidence = res.second;
             plateinfo.setPlateName(res.first);
 
             results.push_back(plateinfo);
         }
 
+        show_lpr_result(image_in, results, det_threshold);
     }
 
 
 
     cv::Mat LPR_NCS::infer_fine_horizon(cv::Mat image_in, int leftPadding, int rightPadding){
-
-
         cv::Mat cropped;
 //        if(FinedVertical.channels()==1)
 //            cv::cvtColor(FinedVertical,FinedVertical,cv::COLOR_GRAY2BGR);
         ////prepare img need by movidius
 //        cv::resize(image_in, ROS_img_resized_rough, cv::Size(66, 16), 0, 0, CV_INTER_LINEAR);
         unsigned char *img = cvMat_to_charImg(image_in);
-        imageBufFP32Ptr = LoadImage32(img, 66, 16, image_in.cols, image_in.rows, networkMean);
+        imageBufFP32Ptr_fine = LoadImage32(img, 66, 16, image_in.cols, image_in.rows, networkMean);
 
         ////infer the refine horizon model
+        unsigned int tensorSizeFine = 0;  /* size of image buffer should be: sizeof(float) * reqsize * reqsize * 3;*/
+        tensorSizeFine = sizeof(float) * 66 * 16 * 3;
+
+        // queue the inference to start, when its done the result will be placed on the output fifo
+        retCodeFine = ncGraphQueueInferenceWithFifoElem(
+                graphHandlePtr_fine, inFifoHandlePtr_fine, outFifoHandlePtr_fine, imageBufFP32Ptr_fine, &tensorSizeFine, NULL);
+
+        if (retCodeFine != NC_OK)
+        {   // error queuing input tensor for inference
+            printf("Could not queue detection inference\n");
+            printf("Error from ncGraphQueueInferenceWithFifoElem is: %d\n", retCodeFine);
+            exit(-1);
+        }
+        else
+        {
+            // the inference has been started, now read the output queue for the inference result
+            printf("---------------Successfully queued the detection inference for image-----------\n");
+
+            unsigned int outFifoElemSize = 0;
+            unsigned int optionSize = sizeof(outFifoElemSize);
+            ncFifoGetOption(outFifoHandlePtr_fine,  NC_RO_FIFO_ELEMENT_DATA_SIZE, &outFifoElemSize, &optionSize);
+
+            float* resultDataFP32Ptr = (float*) malloc(outFifoElemSize);
+            void* UserParamPtr = NULL;
+
+            // read the output of the inference.  this will be in FP32 since that is how the fifos are created by default.
+            retCodeFine = ncFifoReadElem(outFifoHandlePtr_fine, (void*)resultDataFP32Ptr, &outFifoElemSize, &UserParamPtr);
+            if (retCodeFine == NC_OK)
+            {   // Successfully got the inference result.
+                // The inference result is in the buffer pointed to by resultDataFP32Ptr
+                int front = static_cast<int>(resultDataFP32Ptr[1]);
+                int back = static_cast<int>(resultDataFP32Ptr[0]);
+                front -= leftPadding ;
+                if(front<0) front = 0;
+                back +=rightPadding;
+                if(back>image_in.cols-1) back=image_in.cols - 1;
+                cropped  = image_in.colRange(front,back).clone();
+            }
+            delete imageBufFP32Ptr_fine;
+            free((void*)resultDataFP32Ptr);
+        }
+
+        return  cropped;
+    }
+
+
+    std::pair<std::string,float> LPR_NCS::infer_det(cv::Mat Image,std::vector<std::string> mapping_table){
+        std::pair<std::string,float> result_;
+        cv::transpose(Image,Image);
+
+        ////prepare img need by movidius
+//        cv::resize(image_in, ROS_img_resized_rough, cv::Size(66, 16), 0, 0, CV_INTER_LINEAR);
+        unsigned char *img = cvMat_to_charImg(Image);
+        imageBufFP32Ptr_det = LoadImage32(img, 160, 40, Image.cols, Image.rows, networkMean);
+
+        ////infer the lpr detect model
         unsigned int tensorSizeDet = 0;  /* size of image buffer should be: sizeof(float) * reqsize * reqsize * 3;*/
-        tensorSizeDet = sizeof(float) * 66 * 16 * 3;
+        tensorSizeDet = sizeof(float) * 160 * 40 * 3;
 
         // queue the inference to start, when its done the result will be placed on the output fifo
         retCodeDet = ncGraphQueueInferenceWithFifoElem(
-                graphHandlePtr_det, inFifoHandlePtr_det, outFifoHandlePtr_det, imageBufFP32Ptr, &tensorSizeDet, NULL);
+                graphHandlePtr_det, inFifoHandlePtr_det, outFifoHandlePtr_det, imageBufFP32Ptr_det, &tensorSizeDet, NULL);
 
         if (retCodeDet != NC_OK)
         {   // error queuing input tensor for inference
@@ -265,27 +314,18 @@ namespace lpr_ncs {
             if (retCodeDet == NC_OK)
             {   // Successfully got the inference result.
                 // The inference result is in the buffer pointed to by resultDataFP32Ptr
-                int front = static_cast<int>(resultDataFP32Ptr[1]);
-                int back = static_cast<int>(resultDataFP32Ptr[0]);
-                front -= leftPadding ;
-                if(front<0) front = 0;
-                back +=rightPadding;
-                if(back>image_in.cols-1) back=image_in.cols - 1;
-                cropped  = image_in.colRange(front,back).clone();
-            }
+                printf("Successfully got the inference result for image\n");
+                int numResults = outFifoElemSize/(int)sizeof(float);
 
+                printf("resultData is %d bytes which is %d 32-bit floats.\n", outFifoElemSize, numResults);
+            }
+            delete imageBufFP32Ptr_det;
             free((void*)resultDataFP32Ptr);
         }
 
-        return  cropped;
+        return result_;
+
     }
-
-
-
-
-
-
-
 
 
 

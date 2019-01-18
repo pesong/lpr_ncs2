@@ -12,7 +12,6 @@
   <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/ros.yaml"/>
   <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/cameraParams.yaml"/>
   <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/backbone_graph.yaml"/>
-  <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/gaussian_person_ssd_ncs.yaml"/>
 
   <!--node pkg="ssddetect" type="ssddetect" name="ssddetect" output="screen" launch-prefix="$(arg launch_prefix) gdb -ex run"-->
   <node pkg="lpr_ncs2" type="lpr_ncs2" name="lpr_ncs2" output="screen" launch-prefix="$(arg launch_prefix)">

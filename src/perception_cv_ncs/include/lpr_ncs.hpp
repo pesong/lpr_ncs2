@@ -10,6 +10,7 @@
 #include <thread>
 #include <boost/smart_ptr.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/algorithm/string.hpp>
 
 // ROS
 #include <ros/ros.h>
@@ -24,6 +25,13 @@
 // NCS
 #include "ncs_utils/ncs_util.h"
 #include <mvnc.h>
+#include "SegmentationFreeRecognizer.h"
+#include "Pipeline.h"
+#include "PlateInfo.h"
+
+// Check for xServer
+#include <X11/Xlib.h>
+
 
 namespace lpr_ncs {
 
@@ -34,22 +42,15 @@ namespace lpr_ncs {
     int networkDim;
     int target_h;
     int target_w;
-    //cityscapes:
-//    float networkMean[] = {71.60167789, 82.09696889, 72.30608881};
+
     float networkMean[] = {0., 0., 0.};
 
     //image buffer
-    float* imageBufFP32Ptr;
-    cv::Mat ROS_img_resized;
-
-    float* imageBufFP32Ptr_rough;
-    cv::Mat ROS_img_resized_rough;
-
-
+    float* imageBufFP32Ptr_fine;
+    float* imageBufFP32Ptr_det;
 
     class LPR_NCS {
     public:
-
         /*!
         * Constructor.
         */
@@ -61,55 +62,21 @@ namespace lpr_ncs {
         ~LPR_NCS();
 
     private:
-
         /*!
          * Initialize the movidius and ROS connections.
          */
         void init();
         void init_ncs();
-        void init_lpr();
-
 
         /*!
          * Callback of camera.
          * @param[in] msg image pointer.
          */
         void imageCallback(const sensor_msgs::ImageConstPtr& msg);
-
         void plates_infer(cv::Mat image_in);
         cv::Mat infer_fine_horizon(cv::Mat image_in, int leftPadding,int rightPadding);
+        std::pair<std::string,float> infer_det(cv::Mat Image,std::vector<std::string> mapping_table);
 
-
-
-
-        cv::Mat camImageCopy_;
-        std::vector<cv::Mat> plate_imgs_;
-
-        std::thread inferThread_;
-
-        bool imageStatus_ = false;
-        bool isNodeRunning_ = true;
-
-        void *segThread();
-        void *detThread();
-        void *publishThread();
-
-
-        //! thread
-        float det_threshold;
-
-        void infer();
-        cv::Mat getCVImage();
-
-        bool getImageStatus(void);
-        bool isNodeRunning(void);
-
-        bool flipFlag;
-        double demoTime_;
-        int demoDone_ = 0;
-        float fps_ = 0;
-
-        cv::Mat seg_out_img;
 
         //! ROS node handle.
         ros::NodeHandle nodeHandle_;
@@ -121,7 +88,7 @@ namespace lpr_ncs {
         image_transport::Subscriber imageSubscriber_;
         image_transport::Publisher imageSegPub_;
 
-
+        float det_threshold;
     };
 }
 

@@ -16,16 +16,18 @@
 //! movidius preprocessing
 bool g_graph_Success;
 ncStatus_t retCodeDet;
+ncStatus_t retCodeFine;
+
 struct ncDeviceHandle_t* deviceHandlePtr;
-struct ncGraphHandle_t* graphHandlePtr_seg;
+struct ncGraphHandle_t* graphHandlePtr_fine;
 struct ncGraphHandle_t* graphHandlePtr_det;
-void* graphFileBuf_seg;
+void* graphFileBuf_fine;
 void* graphFileBuf_det;
-unsigned int graphFileLenSeg;
+unsigned int graphFileLenFine;
 unsigned int graphFileLenDet;
 // Now we need to allocate graph and create and in/out fifos
-struct ncFifoHandle_t* inFifoHandlePtr_seg;
-struct ncFifoHandle_t* outFifoHandlePtr_seg;
+struct ncFifoHandle_t* inFifoHandlePtr_fine;
+struct ncFifoHandle_t* outFifoHandlePtr_fine;
 struct ncFifoHandle_t* inFifoHandlePtr_det;
 struct ncFifoHandle_t* outFifoHandlePtr_det;
 
@@ -184,6 +186,109 @@ float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, in
     }
     return imgfp32;
 }
+
+
+// handle lpr model movidius result
+std::pair<std::string,float> decodeResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres)
+{
+    cv::MatSize mtsize = code_table.size;
+    int sequencelength = mtsize[2];
+    int labellength = mtsize[1];
+
+    printf("label: %d, sequence: %d \n", labellength, sequencelength);
+
+    cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
+    std::string name = "";
+    std::vector<int> seq(sequencelength);
+    std::vector<std::pair<int,float>> seq_decode_res;
+    for(int i = 0 ; i < sequencelength;  i++) {
+        float *fstart = ((float *) (code_table.data) + i * labellength );
+        int id = std::max_element(fstart,fstart+labellength) - fstart;
+        seq[i] =id;
+    }
+
+    float sum_confidence = 0;
+    int plate_lenghth  = 0 ;
+    for(int i = 0 ; i< sequencelength ; i++)
+    {
+        if(seq[i]!=labellength-1 && (i==0 || seq[i]!=seq[i-1]))
+        {
+            float *fstart = ((float *) (code_table.data) + i * labellength );
+            float confidence = *(fstart+seq[i]);
+            std::pair<int,float> pair_(seq[i],confidence);
+            seq_decode_res.push_back(pair_);
+        }
+    }
+    int  i = 0;
+    if (seq_decode_res.size()>1 && judgeCharRange(seq_decode_res[0].first) && judgeCharRange(seq_decode_res[1].first))
+    {
+        i=2;
+        int c = seq_decode_res[0].second<seq_decode_res[1].second;
+        name+=mapping_table[seq_decode_res[c].first];
+        sum_confidence+=seq_decode_res[c].second;
+        plate_lenghth++;
+    }
+
+    for(; i < seq_decode_res.size();i++)
+    {
+        name+=mapping_table[seq_decode_res[i].first];
+        sum_confidence +=seq_decode_res[i].second;
+        plate_lenghth++;
+    }
+    std::pair<std::string,float> res;
+    res.second = sum_confidence/plate_lenghth;
+    res.first = name;
+    return res;
+
+}
+inline int judgeCharRange(int id)
+{
+    return id<31 || id>63;
+}
+
+
+
+void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th){
+
+    for(int i = 0; i < res.size(); i++){
+
+        if(res[i].confidence>th) {
+            std::cout << res[i].getPlateName() << " " << res[i].confidence << std::endl;
+
+            std::string label_result = res[i].getPlateName();
+            char * text_char = new char [label_result.length()+1];
+            char * text_char_new = new char [label_result.length()+2];
+            strcpy (text_char, label_result.c_str());
+
+            text_char_new[0] = text_char[0];
+            text_char_new[1] = text_char[1];
+            text_char_new[2] = text_char[2];
+            text_char_new[3] = text_char[2];
+
+            for(int i=3; i< label_result.length()+1; i++){
+                text_char_new[i+1] = text_char[i];
+            }
+
+            //get detection result
+            cv::Rect region = res[i].getPlateRect();
+
+            // draw bbox
+            cv::rectangle(frame,cv::Point(region.x,region.y),
+                          cv::Point((region.x+region.width * 0.9),(region.y+region.height * 0.9)),cv::Scalar(255,0,0),1);
+//          cv::putText(frame,"沪", cv::Point(region.x, region.y),
+//                            cv::FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255, 255, 255), 0.4, CV_AA);
+
+            //draw text
+//          text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(255, 255, 255));
+
+        }
+    }
+
+//    cv::imshow("Video",frame);
+//    cv::waitKey(1);
+
+}
+
 
 
 //convert movidius seg_output to mask image
