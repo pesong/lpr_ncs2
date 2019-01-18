@@ -13,9 +13,12 @@ namespace pr {
         int sequencelength = mtsize[2];
         int labellength = mtsize[1];
 
-        printf("label: %d, sequence: %d \n", labellength, sequencelength);
+        printf("se: %d, label: %d \n", sequencelength, labellength);
 
         cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
+
+        std::cout<<"cols: "<< code_table.cols << " rows: " << code_table.rows << std::endl;
+
         std::string name = "";
         std::vector<int> seq(sequencelength);
         std::vector<std::pair<int,float>> seq_decode_res;
@@ -65,6 +68,9 @@ namespace pr {
         int sequencelength = mtsize[2];
         int labellength = mtsize[1];
         cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
+
+
+
         std::string name = "";
         std::vector<int> seq(sequencelength);
         for(int i = 0 ; i < sequencelength;  i++) {

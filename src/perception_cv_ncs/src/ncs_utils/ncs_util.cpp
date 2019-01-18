@@ -135,7 +135,7 @@ void *LoadFile(const char *path, unsigned int *length)
 }
 
 // load the image converted from ros topic, resize and normalize the image with type float32
-float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean)
+float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean, unsigned int* bufSize)
 {
     int i;
     unsigned char *imgresized;
@@ -155,9 +155,18 @@ float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, in
     }
     stbir_resize_uint8(img, ori_w, ori_h, 0, imgresized, target_w, target_h, 0, 3);
     free(img);
-    imgfp32 = (float*) malloc(sizeof(*imgfp32) * target_w * target_h * 3);
+    unsigned int allocateSize = sizeof(*imgfp32) * target_w * target_h * 3;
+    if (bufSize != NULL)
+    {
+        *bufSize = allocateSize;
+    }
+    imgfp32 = (float*) malloc(allocateSize);
     if(!imgfp32)
     {
+        if (bufSize != NULL)
+        {
+            *bufSize = 0;
+        }
         free(imgresized);
         perror("malloc");
         return 0;
@@ -189,15 +198,15 @@ float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, in
 
 
 // handle lpr model movidius result
-std::pair<std::string,float> decodeResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres)
+std::pair<std::string,float> decodeLPRResults(cv::Mat code_table,std::vector<std::string> mapping_table, float thres)
 {
-    cv::MatSize mtsize = code_table.size;
-    int sequencelength = mtsize[2];
-    int labellength = mtsize[1];
+    int sequencelength = code_table.rows;
+    int labellength = code_table.cols;
 
-    printf("label: %d, sequence: %d \n", labellength, sequencelength);
+    printf("sequence_len: %d, label_len: %d \n", sequencelength, labellength);
 
-    cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
+
+//    cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
     std::string name = "";
     std::vector<int> seq(sequencelength);
     std::vector<std::pair<int,float>> seq_decode_res;
@@ -289,28 +298,24 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th){
 
 }
 
+//
+//convert movidius lpr_result to cv::Mat 84,20
+void lpr_result_process(float *output, cv::Mat &code_table)
 
-
-//convert movidius seg_output to mask image
-cv::Mat seg_result_process(float *output, int h, int w)
 {
-    cv::Mat mask_gray(h, w, CV_8UC1);
-    cv::Mat mask;
+    int h = 20;
+    int w = 84;
+    cv::Mat ncs_out(h, w, CV_32FC1);
 
     for (int i = 0; i < h; ++i) {
         for (int j = 0; j < w; ++j) {
-            if(output[2*(w*i + j)] < output[2*(w*i + j) + 1]){
-                mask_gray.at<uchar>(i,j) = 255;
-            } else{
-                mask_gray.at<uchar>(i,j) = 0;
-            }
+            ncs_out.at<float>(i,j) = output[w*i + j] * 127.5 ;
         }
     }
-    // gray -> color
-    cv::cvtColor(mask_gray, mask, cv::COLOR_GRAY2BGR);
-
-    return mask;
+    code_table = ncs_out;
 }
+
+
 
 //  a.	First fp16 value holds the number of valid detections = num_valid.
 //  b.	The next 6 values are unused.

@@ -29,7 +29,8 @@ namespace lpr_ncs {
                        "/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/model/SegmenationFree-Inception.prototxt",
                        "/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/model/SegmenationFree-Inception.caffemodel"
     );
-
+    cv::Mat frame;
+    cv::VideoCapture cap;
 
     //  init movidius:open ncs device, creat graph and read in a graph
     void LPR_NCS::init_ncs() {
@@ -73,7 +74,6 @@ namespace lpr_ncs {
         }
 
         // The device is open and ready to be used.
-        // Pass it to other NC API calls as needed and close and destroy it when finished.
         printf("Successfully opened NC device!\n");
 
         // Create the graph
@@ -119,7 +119,6 @@ namespace lpr_ncs {
                 // Now graphHandle is ready to go we it can now process inferences.
                 printf("Successfully allocated graph for %s\n", GRAPH_FILE_NAME_DET);
             }
-
         }
     }
 
@@ -135,6 +134,13 @@ namespace lpr_ncs {
         // infer thread
         imageSubscriber_ = imageTransport_.subscribe(cameraTopicName, 1, &LPR_NCS::imageCallback, this);
         imageSegPub_ = imageTransport_.advertise(OutTopicName, 1);
+
+        //.. tmp
+//        cap.open(0);
+        cap.open("/media/pesong/e/dl_gaussian/model/HyperLPR/Prj-Linux/detect.mp4");
+        if(!cap.isOpened()){
+            exit(-1);
+        }
 
     }
 
@@ -158,21 +164,8 @@ namespace lpr_ncs {
 //            printf("begin plate infer");
 //            plates_infer(image0);
 //        }
-
-
-
-        ////tmp
-        cv::VideoCapture cap;
-        cap.open(0);
-
-        if(!cap.isOpened()){
-            exit(-1);
-        }
-        cv::Mat frame;
         cap.read(frame);
         plates_infer(frame);
-
-
     }
 
     void LPR_NCS::plates_infer(cv::Mat image_in){
@@ -184,17 +177,15 @@ namespace lpr_ncs {
 
         for (pr::PlateInfo plateinfo:plates) {
 
-            printf("handle each plates");
-
             cv::Mat image_finemapping = plateinfo.getPlateImage();
             image_finemapping = prc.fineMapping->FineMappingVertical(image_finemapping);
             image_finemapping = pr::fastdeskew(image_finemapping, 5);
 
             //Segmentation-free
-            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
+//            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
 
             // movidius infer: fine horizon
-//            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
+            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
 
 //            cv::imshow("fine",image_finemapping);
 //            cv::waitKey(1);
@@ -202,9 +193,9 @@ namespace lpr_ncs {
             cv::resize(image_finemapping, image_finemapping, cv::Size(136+HorizontalPadding, 36));
             plateinfo.setPlateImage(image_finemapping);
 
-            std::pair<std::string,float> res = prc.segmentationFreeRecognizer->SegmentationFreeForSinglePlate(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+//            std::pair<std::string,float> res = prc.segmentationFreeRecognizer->SegmentationFreeForSinglePlate(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
 
-//            std::pair<std::string,float> res = infer_det(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+            std::pair<std::string,float> res = infer_det(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
 
             plateinfo.confidence = res.second;
             plateinfo.setPlateName(res.first);
@@ -224,11 +215,10 @@ namespace lpr_ncs {
         ////prepare img need by movidius
 //        cv::resize(image_in, ROS_img_resized_rough, cv::Size(66, 16), 0, 0, CV_INTER_LINEAR);
         unsigned char *img = cvMat_to_charImg(image_in);
-        imageBufFP32Ptr_fine = LoadImage32(img, 66, 16, image_in.cols, image_in.rows, networkMean);
 
         ////infer the refine horizon model
         unsigned int tensorSizeFine = 0;  /* size of image buffer should be: sizeof(float) * reqsize * reqsize * 3;*/
-        tensorSizeFine = sizeof(float) * 66 * 16 * 3;
+        imageBufFP32Ptr_fine = LoadImage32(img, 66, 16, image_in.cols, image_in.rows, networkMean, &tensorSizeFine);
 
         // queue the inference to start, when its done the result will be placed on the output fifo
         retCodeFine = ncGraphQueueInferenceWithFifoElem(
@@ -243,7 +233,7 @@ namespace lpr_ncs {
         else
         {
             // the inference has been started, now read the output queue for the inference result
-            printf("---------------Successfully queued the detection inference for image-----------\n");
+            printf("---------------Successfully queued the horizon fine inference for image-----------\n");
 
             unsigned int outFifoElemSize = 0;
             unsigned int optionSize = sizeof(outFifoElemSize);
@@ -257,8 +247,11 @@ namespace lpr_ncs {
             if (retCodeFine == NC_OK)
             {   // Successfully got the inference result.
                 // The inference result is in the buffer pointed to by resultDataFP32Ptr
-                int front = static_cast<int>(resultDataFP32Ptr[1]);
-                int back = static_cast<int>(resultDataFP32Ptr[0]);
+                int front = static_cast<int>(resultDataFP32Ptr[0] * 127.5);
+                int back = static_cast<int>(resultDataFP32Ptr[1] * 127.5);
+
+                std::cout<< "front: " << front << " back: " << back << std::endl;
+
                 front -= leftPadding ;
                 if(front<0) front = 0;
                 back +=rightPadding;
@@ -274,17 +267,16 @@ namespace lpr_ncs {
 
 
     std::pair<std::string,float> LPR_NCS::infer_det(cv::Mat Image,std::vector<std::string> mapping_table){
+
         std::pair<std::string,float> result_;
         cv::transpose(Image,Image);
+        cv::Mat code_table;
 
         ////prepare img need by movidius
 //        cv::resize(image_in, ROS_img_resized_rough, cv::Size(66, 16), 0, 0, CV_INTER_LINEAR);
         unsigned char *img = cvMat_to_charImg(Image);
-        imageBufFP32Ptr_det = LoadImage32(img, 160, 40, Image.cols, Image.rows, networkMean);
-
-        ////infer the lpr detect model
-        unsigned int tensorSizeDet = 0;  /* size of image buffer should be: sizeof(float) * reqsize * reqsize * 3;*/
-        tensorSizeDet = sizeof(float) * 160 * 40 * 3;
+        unsigned int tensorSizeDet = 0;
+        imageBufFP32Ptr_det = LoadImage32(img, 160, 40, Image.cols, Image.rows, networkMean, &tensorSizeDet);
 
         // queue the inference to start, when its done the result will be placed on the output fifo
         retCodeDet = ncGraphQueueInferenceWithFifoElem(
@@ -313,11 +305,8 @@ namespace lpr_ncs {
             retCodeDet = ncFifoReadElem(outFifoHandlePtr_det, (void*)resultDataFP32Ptr, &outFifoElemSize, &UserParamPtr);
             if (retCodeDet == NC_OK)
             {   // Successfully got the inference result.
-                // The inference result is in the buffer pointed to by resultDataFP32Ptr
-                printf("Successfully got the inference result for image\n");
-                int numResults = outFifoElemSize/(int)sizeof(float);
-
-                printf("resultData is %d bytes which is %d 32-bit floats.\n", outFifoElemSize, numResults);
+                lpr_result_process(resultDataFP32Ptr, code_table);
+                result_ = decodeLPRResults(code_table, mapping_table, 0.0);
             }
             delete imageBufFP32Ptr_det;
             free((void*)resultDataFP32Ptr);

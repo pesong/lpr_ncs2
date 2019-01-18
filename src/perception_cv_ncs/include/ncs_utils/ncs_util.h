@@ -89,11 +89,13 @@ extern void ipl_into_image(IplImage *src, image *im);
 extern unsigned char* image_to_stb(image* in);
 extern unsigned char* cvMat_to_charImg(cv::Mat pic);
 extern void *LoadFile(const char *path, unsigned int *length);
-extern float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean);
+extern float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean, unsigned int* bufSize);
 
 extern inline int judgeCharRange(int id);
 extern void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th);
-extern std::pair<std::string,float> decodeResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres);
+extern std::pair<std::string,float> decodeLPRResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres);
+
+extern void lpr_result_process(float *output, cv::Mat &code_table);
 extern cv::Mat seg_result_process(float* output, int h, int w);
 extern void ssd_result_process(float *output, std::vector<Box> &result, cv::Mat &image, int numClasses_);
 extern bool Overlay_on_image(cv::Mat& image, float* object_info, int Length, Box& single_box);
