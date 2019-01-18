@@ -103,6 +103,9 @@
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_ncs.hpp">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_ncs_v2.hpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/include/lpr_utils/CNNRecognizer.h">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
@@ -152,6 +155,9 @@
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs.cpp">
+			<Option target="License_Plate_Recognition_ros_ncsv2"/>
+		</Unit>
+		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs_v2.cpp">
 			<Option target="License_Plate_Recognition_ros_ncsv2"/>
 		</Unit>
 		<Unit filename="/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp">

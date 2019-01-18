@@ -1,5 +1,9 @@
-#ifndef LICENSE_PLATE_RECOGNITION_ROS_NCSV2_LPR_NCS_HPP
-#define LICENSE_PLATE_RECOGNITION_ROS_NCSV2_LPR_NCS_HPP
+//
+// Created by pesong on 18-9-5.
+//
+
+#ifndef PERCEPTION_CV_H
+#define PERCEPTION_CV_H
 
 #include <iostream>
 #include <math.h>
@@ -25,40 +29,38 @@
 #include "ncs_utils/ncs_util.h"
 #include <mvnc.h>
 
-namespace lpr_ncs {
+
+namespace lpr_ncs2 {
 
     // graph file name
     char *GRAPH_FILE_NAME_DET;
-    char *GRAPH_FILE_NAME_FINE;
+    char *GRAPH_FILE_NAME_SEG;
     //! image dimensions, network mean values for each channel in BGR order.
     int networkDim;
     int target_h;
     int target_w;
     //cityscapes:
 //    float networkMean[] = {71.60167789, 82.09696889, 72.30608881};
-    float networkMean[] = {0., 0., 0.};
+     float networkMean[] = {125., 125., 125.};
 
     //image buffer
     float* imageBufFP32Ptr;
     cv::Mat ROS_img_resized;
 
-    float* imageBufFP32Ptr_rough;
-    cv::Mat ROS_img_resized_rough;
 
 
-
-    class LPR_NCS {
+    class LPR_NCS_V2 {
     public:
 
         /*!
         * Constructor.
         */
-        explicit LPR_NCS(ros::NodeHandle nh);
+        explicit LPR_NCS_V2(ros::NodeHandle nh);
 
         /*!
          * Destructor.
          */
-        ~LPR_NCS();
+        ~LPR_NCS_V2();
 
     private:
 
@@ -75,12 +77,6 @@ namespace lpr_ncs {
          * @param[in] msg image pointer.
          */
         void imageCallback(const sensor_msgs::ImageConstPtr& msg);
-
-        void plates_infer(cv::Mat image_in);
-        cv::Mat infer_fine_horizon(cv::Mat image_in, int leftPadding,int rightPadding);
-
-
-
 
         cv::Mat camImageCopy_;
         std::vector<cv::Mat> plate_imgs_;
@@ -124,8 +120,4 @@ namespace lpr_ncs {
 
     };
 }
-
-
-
-
-#endif //LICENSE_PLATE_RECOGNITION_ROS_NCSV2_LPR_NCS_HPP
+#endif //PERCEPTION_CV_H

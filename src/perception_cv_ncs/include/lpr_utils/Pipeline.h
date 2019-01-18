@@ -23,21 +23,14 @@ namespace pr{
 
 
 
-    const int SEGMENTATION_FREE_METHOD = 0;
-    const int SEGMENTATION_BASED_METHOD = 1;
-
     class PipelinePR{
         public:
-            GeneralRecognizer *generalRecognizer;
             PlateDetection *plateDetection;
-            PlateSegmentation *plateSegmentation;
             FineMapping *fineMapping;
             SegmentationFreeRecognizer *segmentationFreeRecognizer;
 
             PipelinePR(std::string detector_filename,
                        std::string finemapping_prototxt,std::string finemapping_caffemodel,
-                       std::string segmentation_prototxt,std::string segmentation_caffemodel,
-                       std::string charRecognization_proto,std::string charRecognization_caffemodel,
                        std::string segmentationfree_proto,std::string segmentationfree_caffemodel
                        );
             ~PipelinePR();
@@ -45,7 +38,7 @@ namespace pr{
 
 
             std::vector<std::string> plateRes;
-            std::vector<PlateInfo> RunPiplineAsImage(cv::Mat plateImage,int method);
+            std::vector<PlateInfo> RunPiplineAsImage(cv::Mat plateImage);
 
 
 

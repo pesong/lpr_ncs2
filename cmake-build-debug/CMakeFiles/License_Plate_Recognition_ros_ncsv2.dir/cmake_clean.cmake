@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o"
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o"
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o"
+  "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o"
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o"
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o"
   "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o"

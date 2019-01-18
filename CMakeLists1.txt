@@ -23,6 +23,7 @@ add_executable(License_Plate_Recognition_ros_ncsv2
         src/perception_cv_ncs/include/lpr_utils/Recognizer.h
         src/perception_cv_ncs/include/lpr_utils/SegmentationFreeRecognizer.h
         src/perception_cv_ncs/include/lpr_utils/util.h
+        src/perception_cv_ncs/include/lpr_ncs_v2.hpp
         src/perception_cv_ncs/include/lpr_ncs.hpp
         src/perception_cv_ncs/include/ncs_utils/ncs_util.h
         src/perception_cv_ncs/include/ncs_utils/stb_image.h
@@ -36,6 +37,7 @@ add_executable(License_Plate_Recognition_ros_ncsv2
         src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp
         src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp
         src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp
+        src/perception_cv_ncs/src/lpr_ncs_v2.cpp
         src/perception_cv_ncs/src/lpr_ncs.cpp
         src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp
         src/perception_cv_ncs/main.cc)

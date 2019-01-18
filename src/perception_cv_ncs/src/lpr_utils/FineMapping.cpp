@@ -25,6 +25,9 @@ namespace pr{
         cv::Mat inputBlob = cv::dnn::blobFromImage(FinedVertical, 1/255.0, cv::Size(66,16),
                                       cv::Scalar(0,0,0),false);
 
+        cv::imshow("inputbolb", inputBlob);
+        cv::waitKey(1);
+
         net.setInput(inputBlob,"data");
         cv::Mat prob = net.forward();
         int front = static_cast<int>(prob.at<float>(0,0)*FinedVertical.cols);

@@ -177,6 +177,33 @@ src/perception_cv_ncs/src/lpr_ncs.cpp.s:
 	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.s
 .PHONY : src/perception_cv_ncs/src/lpr_ncs.cpp.s
 
+src/perception_cv_ncs/src/lpr_ncs_v2.o: src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o
+
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.o
+
+# target to build an object file
+src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o
+
+src/perception_cv_ncs/src/lpr_ncs_v2.i: src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i
+
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.i
+
+# target to preprocess a source file
+src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i
+
+src/perception_cv_ncs/src/lpr_ncs_v2.s: src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s
+
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.s
+
+# target to generate assembly for a file
+src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s:
+	$(MAKE) -f CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s
+.PHONY : src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s
+
 src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o: src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.cpp.o
 
 .PHONY : src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o
@@ -435,6 +462,9 @@ help:
 	@echo "... src/perception_cv_ncs/src/lpr_ncs.o"
 	@echo "... src/perception_cv_ncs/src/lpr_ncs.i"
 	@echo "... src/perception_cv_ncs/src/lpr_ncs.s"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs_v2.o"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs_v2.i"
+	@echo "... src/perception_cv_ncs/src/lpr_ncs_v2.s"
 	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.o"
 	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.i"
 	@echo "... src/perception_cv_ncs/src/lpr_utils/CNNRecognizer.s"

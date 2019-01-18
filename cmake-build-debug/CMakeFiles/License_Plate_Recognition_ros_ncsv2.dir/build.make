@@ -161,9 +161,22 @@ CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.s
 
+CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/flags.make
+CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o: ../src/perception_cv_ncs/src/lpr_ncs_v2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o -c /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs_v2.cpp
+
+CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs_v2.cpp > CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.i
+
+CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs_v2.cpp -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.s
+
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/flags.make
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o: ../src/perception_cv_ncs/src/lpr_ncs.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o -c /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/lpr_ncs.cpp
 
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr
 
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/flags.make
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o: ../src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o -c /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp
 
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.i: cmake_force
@@ -189,7 +202,7 @@ CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs
 
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/flags.make
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o: ../src/perception_cv_ncs/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o -c /dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/main.cc
 
 CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.i: cmake_force
@@ -210,6 +223,7 @@ License_Plate_Recognition_ros_ncsv2_OBJECTS = \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o" \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o" \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o" \
+"CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o" \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o" \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o" \
 "CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o"
@@ -225,12 +239,13 @@ License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_nc
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/PlateSegmentation.cpp.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/Recognizer.cpp.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_utils/SegmentationFreeRecognizer.cpp.o
+License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs_v2.cpp.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/lpr_ncs.cpp.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/src/ncs_utils/ncs_util.cpp.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/src/perception_cv_ncs/main.cc.o
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/build.make
 License_Plate_Recognition_ros_ncsv2: CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable License_Plate_Recognition_ros_ncsv2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/dl/ros/License_Plate_Recognition_ros_ncsv2/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable License_Plate_Recognition_ros_ncsv2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/License_Plate_Recognition_ros_ncsv2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
