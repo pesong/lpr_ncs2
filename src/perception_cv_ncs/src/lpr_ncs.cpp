@@ -174,6 +174,7 @@ namespace lpr_ncs {
         std::vector<pr::PlateInfo> plates;
         prc.plateDetection->plateDetectionRough(image_in,plates,36,700);
         const int HorizontalPadding = 4;
+        cv::Mat out_frame;
 
         for (pr::PlateInfo plateinfo:plates) {
 
@@ -193,9 +194,9 @@ namespace lpr_ncs {
             cv::resize(image_finemapping, image_finemapping, cv::Size(136+HorizontalPadding, 36));
             plateinfo.setPlateImage(image_finemapping);
 
-//            std::pair<std::string,float> res = prc.segmentationFreeRecognizer->SegmentationFreeForSinglePlate(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+            std::pair<std::string,float> res = prc.segmentationFreeRecognizer->SegmentationFreeForSinglePlate(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
 
-            std::pair<std::string,float> res = infer_det(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
+//            std::pair<std::string,float> res = infer_det(plateinfo.getPlateImage(),pr::CH_PLATE_CODE);
 
             plateinfo.confidence = res.second;
             plateinfo.setPlateName(res.first);
@@ -203,7 +204,10 @@ namespace lpr_ncs {
             results.push_back(plateinfo);
         }
 
-        show_lpr_result(image_in, results, det_threshold);
+        show_lpr_result(image_in, results, det_threshold, out_frame);
+        sensor_msgs::ImagePtr msg_lpr = cv_bridge::CvImage(std_msgs::Header(), "bgr8", out_frame).toImageMsg();
+        imageSegPub_.publish(msg_lpr);
+
     }
 
 

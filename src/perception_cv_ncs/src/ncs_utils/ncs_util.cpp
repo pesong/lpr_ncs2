@@ -257,7 +257,7 @@ inline int judgeCharRange(int id)
 
 
 
-void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th){
+void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame){
 
     for(int i = 0; i < res.size(); i++){
 
@@ -289,6 +289,7 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th){
 
             //draw text
 //          text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(255, 255, 255));
+            out_frame = frame;
 
         }
     }

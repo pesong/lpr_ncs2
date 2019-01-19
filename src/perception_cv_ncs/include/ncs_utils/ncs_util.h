@@ -92,7 +92,7 @@ extern void *LoadFile(const char *path, unsigned int *length);
 extern float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean, unsigned int* bufSize);
 
 extern inline int judgeCharRange(int id);
-extern void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th);
+extern void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame);
 extern std::pair<std::string,float> decodeLPRResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres);
 
 extern void lpr_result_process(float *output, cv::Mat &code_table);
