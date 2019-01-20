@@ -7,7 +7,7 @@ namespace lpr_ncs {
     : nodeHandle_(nh),
       imageTransport_(nodeHandle_){
 
-        ROS_INFO("[SSD_Detector] Node started.");
+        ROS_INFO("[Detector] Node started.");
 
         init_ncs();
         init();
@@ -237,7 +237,7 @@ namespace lpr_ncs {
         else
         {
             // the inference has been started, now read the output queue for the inference result
-            printf("---------------Successfully queued the horizon fine inference for image-----------\n");
+//            printf("---------------Successfully queued the horizon fine inference for image-----------\n");
 
             unsigned int outFifoElemSize = 0;
             unsigned int optionSize = sizeof(outFifoElemSize);
@@ -254,7 +254,7 @@ namespace lpr_ncs {
                 int front = static_cast<int>(resultDataFP32Ptr[0] * 127.5);
                 int back = static_cast<int>(resultDataFP32Ptr[1] * 127.5);
 
-                std::cout<< "front: " << front << " back: " << back << std::endl;
+//                std::cout<< "front: " << front << " back: " << back << std::endl;
 
                 front -= leftPadding ;
                 if(front<0) front = 0;
@@ -295,7 +295,7 @@ namespace lpr_ncs {
         else
         {
             // the inference has been started, now read the output queue for the inference result
-            printf("---------------Successfully queued the detection inference for image-----------\n");
+//            printf("---------------Successfully queued the detection inference for image-----------\n");
 
 
             unsigned int outFifoElemSize = 0;

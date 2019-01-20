@@ -30,7 +30,7 @@ namespace pr{
         int front = static_cast<int>(prob.at<float>(0,0)*FinedVertical.cols);
         int back = static_cast<int>(prob.at<float>(0,1)*FinedVertical.cols);
 
-        printf("f: %d, b: %d \n", front, back);
+//        printf("f: %d, b: %d \n", front, back);
 
         front -= leftPadding ;
         if(front<0) front = 0;

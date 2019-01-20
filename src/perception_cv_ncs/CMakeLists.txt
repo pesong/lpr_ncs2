@@ -127,7 +127,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-find_package( OpenCV REQUIRED )
+find_package( OpenCV 3.3.1 REQUIRED )
 include_directories(
 include
         include/lpr_utils
@@ -135,6 +135,9 @@ include
         ${catkin_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
 )
+
+find_package(Freetype  REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
 
 file(GLOB extra_files  ./src/*.cpp ./src/*.c ./src/lpr_utils/*.cpp)
 
@@ -150,6 +153,7 @@ add_library(${PROJECT_NAME}_lib
         src/lpr_utils/PlateSegmentation.cpp
         src/lpr_utils/Recognizer.cpp
         src/lpr_utils/SegmentationFreeRecognizer.cpp
+        src/lpr_utils/CvxText.cpp
         ${extra_files}
 )
 
@@ -162,6 +166,9 @@ add_library(${PROJECT_NAME}_lib
 set(header ./include/)
 include_directories(${header})
 message("header files path: ${header}")
+message("free files path: ${FREETYPE_INCLUDE_DIRS}")
+message("free files path: ${FREETYPE_LIBRARY}")
+
 
 
 
@@ -189,14 +196,18 @@ target_link_libraries(${PROJECT_NAME}_lib
         ${Boost_LIBRARIES}
         ${OpenCV_LIBRARIES}
         ${catkin_LIBRARIES}
-)
+        ${FREETYPE_LIBRARIES}
+        )
 
 
 target_link_libraries(lpr_ncs2  ${PROJECT_NAME}_lib
         ${catkin_LIBRARIES}
         ${OpenCV_LIBS}
         ${Boost_LIBRARIES}
+        ${FREETYPE_LIBRARIES}
 )
+
+
 #############
 ## Install ##
 #############

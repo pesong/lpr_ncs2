@@ -203,7 +203,7 @@ std::pair<std::string,float> decodeLPRResults(cv::Mat code_table,std::vector<std
     int sequencelength = code_table.rows;
     int labellength = code_table.cols;
 
-    printf("sequence_len: %d, label_len: %d \n", sequencelength, labellength);
+//    printf("sequence_len: %d, label_len: %d \n", sequencelength, labellength);
 
 
 //    cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
@@ -259,6 +259,19 @@ inline int judgeCharRange(int id)
 
 void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame){
 
+
+    cv::Ptr<cv::freetype::FreeType2> ft2;
+//    ft2 = cv::freetype::createFreeType2();
+//    ft2->loadFontData( "./MSYH.TTF", 0 );
+
+    std::cout<<"1"<<std::endl;
+    CvxText text("/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_utils/MSYH.TTF");
+    std::cout<<"2"<<std::endl;
+    cv::Scalar size1{ 100, 0.5, 0.1, 0 }, size2{ 100, 0, 0.1, 0 }, size3{ 50, 0, 1, 0 }, size4{20, 0, 0.1, 0};
+    text.setFont(nullptr, &size4, nullptr, 0);
+
+//    ft.loadFontData(fontFileName='Ubuntu-R.ttf', id=0)
+
     for(int i = 0; i < res.size(); i++){
 
         if(res[i].confidence>th) {
@@ -286,9 +299,12 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
                           cv::Point((region.x+region.width * 0.9),(region.y+region.height * 0.9)),cv::Scalar(255,0,0),1);
 //          cv::putText(frame,"沪", cv::Point(region.x, region.y),
 //                            cv::FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255, 255, 255), 0.4, CV_AA);
+//            ft2->putText(frame, "乎", cv::Point(region.x, region.y), 60,
+//                         cv::Scalar::all(255), -1, 8, true );
+
 
             //draw text
-//          text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(255, 255, 255));
+            text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(255, 255, 255));
             out_frame = frame;
 
         }

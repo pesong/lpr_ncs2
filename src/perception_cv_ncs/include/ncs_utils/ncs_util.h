@@ -20,6 +20,9 @@
 #include "Pipeline.h"
 
 #include <mvnc.h>
+#include <opencv2/freetype.hpp>
+#include "CvxText.hpp"
+
 
 
 extern bool g_graph_Success;

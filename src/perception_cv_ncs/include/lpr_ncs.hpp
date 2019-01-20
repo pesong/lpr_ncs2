@@ -28,6 +28,7 @@
 #include "SegmentationFreeRecognizer.h"
 #include "Pipeline.h"
 #include "PlateInfo.h"
+#include "opencv2/opencv.hpp"
 
 // Check for xServer
 #include <X11/Xlib.h>

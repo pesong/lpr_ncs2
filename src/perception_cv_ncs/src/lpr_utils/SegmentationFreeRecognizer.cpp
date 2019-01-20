@@ -13,11 +13,11 @@ namespace pr {
         int sequencelength = mtsize[2];
         int labellength = mtsize[1];
 
-        printf("se: %d, label: %d \n", sequencelength, labellength);
+//        printf("se: %d, label: %d \n", sequencelength, labellength);
 
         cv::transpose(code_table.reshape(1,1).reshape(1,labellength),code_table);
 
-        std::cout<<"cols: "<< code_table.cols << " rows: " << code_table.rows << std::endl;
+//        std::cout<<"cols: "<< code_table.cols << " rows: " << code_table.rows << std::endl;
 
         std::string name = "";
         std::vector<int> seq(sequencelength);
