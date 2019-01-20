@@ -3,7 +3,7 @@ backbone_graph:
     det_graph_name: lpr_ncs_v2.graph
     horizon_fine_graph_name: horizon_fine_v2.graph
 
-  threshold: 0.9
+  threshold: 0.95
   networkDim: 300
   target_h: 300
   target_w: 300

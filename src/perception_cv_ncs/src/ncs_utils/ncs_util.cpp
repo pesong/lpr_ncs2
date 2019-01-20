@@ -260,24 +260,31 @@ inline int judgeCharRange(int id)
 void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame){
 
 
-    cv::Ptr<cv::freetype::FreeType2> ft2;
+//    cv::Ptr<cv::freetype::FreeType2> ft2;
 //    ft2 = cv::freetype::createFreeType2();
 //    ft2->loadFontData( "./MSYH.TTF", 0 );
 
-    std::cout<<"1"<<std::endl;
-    CvxText text("/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_utils/MSYH.TTF");
-    std::cout<<"2"<<std::endl;
-    cv::Scalar size1{ 100, 0.5, 0.1, 0 }, size2{ 100, 0, 0.1, 0 }, size3{ 50, 0, 1, 0 }, size4{20, 0, 0.1, 0};
+    CvxText text("/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/src/ncs_utils/SimHei.ttf");
+    cv::Scalar size1{ 100, 0.5, 0.1, 0 }, size2{ 100, 0, 0.1, 0 }, size3{ 50, 0, 1, 0 }, size4{25, 0, 0.2, 0};
     text.setFont(nullptr, &size4, nullptr, 0);
 
 //    ft.loadFontData(fontFileName='Ubuntu-R.ttf', id=0)
 
     for(int i = 0; i < res.size(); i++){
 
-        if(res[i].confidence>th) {
+        if(res[i].confidence>0.9) {
             std::cout << res[i].getPlateName() << " " << res[i].confidence << std::endl;
 
             std::string label_result = res[i].getPlateName();
+
+            char *cstr = new char[label_result.length() + 1];
+            strcpy(cstr, label_result.c_str());
+
+            std::cout<< label_result.length() << std::endl;
+            printf("result: %d \n", cstr[0]);
+
+
+
             char * text_char = new char [label_result.length()+1];
             char * text_char_new = new char [label_result.length()+2];
             strcpy (text_char, label_result.c_str());
@@ -291,12 +298,14 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
                 text_char_new[i+1] = text_char[i];
             }
 
+
+
             //get detection result
             cv::Rect region = res[i].getPlateRect();
 
             // draw bbox
             cv::rectangle(frame,cv::Point(region.x,region.y),
-                          cv::Point((region.x+region.width * 0.9),(region.y+region.height * 0.9)),cv::Scalar(255,0,0),1);
+                          cv::Point((region.x+region.width * 0.9),(region.y+region.height * 0.9)),cv::Scalar(0,154,238),1);
 //          cv::putText(frame,"沪", cv::Point(region.x, region.y),
 //                            cv::FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255, 255, 255), 0.4, CV_AA);
 //            ft2->putText(frame, "乎", cv::Point(region.x, region.y), 60,
@@ -304,7 +313,7 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
 
 
             //draw text
-            text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(255, 255, 255));
+            text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(0,154,238));
             out_frame = frame;
 
         }

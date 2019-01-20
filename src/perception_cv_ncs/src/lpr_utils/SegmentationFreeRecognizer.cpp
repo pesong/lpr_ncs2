@@ -45,13 +45,22 @@ namespace pr {
         {
             i=2;
             int c = seq_decode_res[0].second<seq_decode_res[1].second;
+
+//            printf("name_0 : %s \n", mapping_table[seq_decode_res[c].first].c_str());
+
             name+=mapping_table[seq_decode_res[c].first];
+
+
+
             sum_confidence+=seq_decode_res[c].second;
             plate_lenghth++;
         }
 
         for(; i < seq_decode_res.size();i++)
         {
+            std::string name_i = mapping_table[seq_decode_res[i].first];
+//            printf("name_1 : %s \n", name_i.c_str());
+
             name+=mapping_table[seq_decode_res[i].first];
             sum_confidence +=seq_decode_res[i].second;
             plate_lenghth++;

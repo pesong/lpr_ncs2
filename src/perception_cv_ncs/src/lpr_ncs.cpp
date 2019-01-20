@@ -9,7 +9,7 @@ namespace lpr_ncs {
 
         ROS_INFO("[Detector] Node started.");
 
-        init_ncs();
+//        init_ncs();
         init();
     }
 
@@ -30,7 +30,7 @@ namespace lpr_ncs {
                        "/dl/ros/License_Plate_Recognition_ros_ncsv2/src/perception_cv_ncs/model/SegmenationFree-Inception.caffemodel"
     );
     cv::Mat frame;
-    cv::VideoCapture cap;
+//    cv::VideoCapture cap;
 
     //  init movidius:open ncs device, creat graph and read in a graph
     void LPR_NCS::init_ncs() {
@@ -51,7 +51,7 @@ namespace lpr_ncs {
         nodeHandle_.param("backbone_graph/target_h", target_h, 300);
         nodeHandle_.param("backbone_graph/target_w", target_w, 300);
         nodeHandle_.param("camera/image_flip", flip_flag, false);
-        nodeHandle_.param("backbone_graph/threshold", det_threshold, (float) 0.9);
+        nodeHandle_.param("backbone_graph/threshold", det_threshold, (float) 0.95);
 
 
         strcpy(GRAPH_FILE_NAME_DET, (graphPath + "/" + graphModelDet).c_str());
@@ -131,16 +131,17 @@ namespace lpr_ncs {
         std::string OutTopicName;
         nodeHandle_.param("subscribers/camera_reading/topic", cameraTopicName, std::string("/camera/image"));
         nodeHandle_.param("subscribers/seg_image/topic", OutTopicName, std::string("/camera/lpr_out"));
-        // infer thread
+
         imageSubscriber_ = imageTransport_.subscribe(cameraTopicName, 1, &LPR_NCS::imageCallback, this);
+
         imageSegPub_ = imageTransport_.advertise(OutTopicName, 1);
 
         //.. tmp
 //        cap.open(0);
-        cap.open("/media/pesong/e/dl_gaussian/model/HyperLPR/Prj-Linux/detect.mp4");
-        if(!cap.isOpened()){
-            exit(-1);
-        }
+//        cap.open("/media/pesong/e/dl_gaussian/model/HyperLPR/Prj-Linux/detect.mp4");
+//        if(!cap.isOpened()){
+//            exit(-1);
+//        }
 
     }
 
@@ -150,22 +151,21 @@ namespace lpr_ncs {
     void LPR_NCS::imageCallback(const sensor_msgs::ImageConstPtr &msg)
     {
         ROS_INFO("[infer:callback] image received.");
-//        cv_bridge::CvImagePtr cam_image;
-//
-//        try {
-//            cam_image = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-//        } catch (cv_bridge::Exception &e) {
-//            ROS_ERROR("cv_bridge exception: %s", e.what());
-//            return;
-//        }
-//
-//        if(cam_image) {
-//            cv::Mat image0 = cam_image->image.clone();
-//            printf("begin plate infer");
-//            plates_infer(image0);
-//        }
-        cap.read(frame);
-        plates_infer(frame);
+        cv_bridge::CvImagePtr cam_image;
+
+        try {
+            cam_image = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+        } catch (cv_bridge::Exception &e) {
+            ROS_ERROR("cv_bridge exception: %s", e.what());
+            return;
+        }
+
+        if(cam_image) {
+            cv::Mat image0 = cam_image->image.clone();
+            plates_infer(image0);
+        }
+//        cap.read(frame);
+//        plates_infer(frame);
     }
 
     void LPR_NCS::plates_infer(cv::Mat image_in){
@@ -183,10 +183,10 @@ namespace lpr_ncs {
             image_finemapping = pr::fastdeskew(image_finemapping, 5);
 
             //Segmentation-free
-//            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
+            image_finemapping = prc.fineMapping->FineMappingHorizon(image_finemapping, 4, HorizontalPadding+3);
 
             // movidius infer: fine horizon
-            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
+//            image_finemapping = infer_fine_horizon(image_finemapping, 4, HorizontalPadding+3);
 
 //            cv::imshow("fine",image_finemapping);
 //            cv::waitKey(1);
