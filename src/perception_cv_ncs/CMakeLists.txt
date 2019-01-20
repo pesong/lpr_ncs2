@@ -167,7 +167,7 @@ set(header ./include/)
 include_directories(${header})
 message("header files path: ${header}")
 message("free files path: ${FREETYPE_INCLUDE_DIRS}")
-message("free files path: ${FREETYPE_LIBRARY}")
+message("opencv files path: ${OpenCV_LIBS}")
 
 
 
@@ -206,7 +206,6 @@ target_link_libraries(lpr_ncs2  ${PROJECT_NAME}_lib
         ${Boost_LIBRARIES}
         ${FREETYPE_LIBRARIES}
 )
-
 
 #############
 ## Install ##

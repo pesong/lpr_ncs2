@@ -260,7 +260,7 @@ inline int judgeCharRange(int id)
 void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame){
 
 
-//    cv::Ptr<cv::freetype::FreeType2> ft2;
+//    cv::Ptr<cv::freetype::FreeType2> ft2 = cv::freetype::createFreeType2();
 //    ft2 = cv::freetype::createFreeType2();
 //    ft2->loadFontData( "./MSYH.TTF", 0 );
 
@@ -276,29 +276,12 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
             std::cout << res[i].getPlateName() << " " << res[i].confidence << std::endl;
 
             std::string label_result = res[i].getPlateName();
-
             char *cstr = new char[label_result.length() + 1];
             strcpy(cstr, label_result.c_str());
 
-            std::cout<< label_result.length() << std::endl;
-            printf("result: %d \n", cstr[0]);
-
-
-
-            char * text_char = new char [label_result.length()+1];
-            char * text_char_new = new char [label_result.length()+2];
-            strcpy (text_char, label_result.c_str());
-
-            text_char_new[0] = text_char[0];
-            text_char_new[1] = text_char[1];
-            text_char_new[2] = text_char[2];
-            text_char_new[3] = text_char[2];
-
-            for(int i=3; i< label_result.length()+1; i++){
-                text_char_new[i+1] = text_char[i];
-            }
-
-
+            const size_t cSize = strlen(cstr)+1;
+            wchar_t* wc = new wchar_t[cSize];
+            mbstowcs (wc, cstr, cSize);
 
             //get detection result
             cv::Rect region = res[i].getPlateRect();
@@ -313,7 +296,7 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
 
 
             //draw text
-            text.putText(frame, text_char_new, cv::Point(region.x, region.y), cv::Scalar(0,154,238));
+            text.putText(frame, wc, cv::Point(region.x, region.y), cv::Scalar(0,154,238));
             out_frame = frame;
 
         }
