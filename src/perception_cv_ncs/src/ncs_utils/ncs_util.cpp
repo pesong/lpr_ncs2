@@ -287,8 +287,14 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
             cv::Rect region = res[i].getPlateRect();
 
             // draw bbox
-            cv::rectangle(frame,cv::Point(region.x,region.y),
-                          cv::Point((region.x+region.width * 0.9),(region.y+region.height * 0.9)),cv::Scalar(0,154,238),1);
+            // int zeroadd_w  = static_cast<int>(region.width*0.1);
+            // int zeroadd_h = static_cast<int>(region.height*2);
+            int zeroadd_x = static_cast<int>(region.width*0.1);
+            int zeroadd_y = static_cast<int>(region.height*0.22);
+
+
+            cv::rectangle(frame,cv::Point(region.x + zeroadd_x, region.y + zeroadd_y),
+                          cv::Point((region.x+region.width * 0.88),(region.y+region.height * 0.75)),cv::Scalar(0,255,0),2);
 //          cv::putText(frame,"沪", cv::Point(region.x, region.y),
 //                            cv::FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255, 255, 255), 0.4, CV_AA);
 //            ft2->putText(frame, "乎", cv::Point(region.x, region.y), 60,
@@ -296,8 +302,10 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
 
 
             //draw text
-            text.putText(frame, wc, cv::Point(region.x, region.y), cv::Scalar(0,154,238));
+            text.putText(frame, wc, cv::Point(region.x + zeroadd_x, region.y + zeroadd_y - 10), cv::Scalar(0,255,0));
             out_frame = frame;
+
+
 
         }
     }
