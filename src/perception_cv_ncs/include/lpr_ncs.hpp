@@ -24,7 +24,7 @@
 
 // NCS
 #include "ncs_utils/ncs_util.h"
-#include <mvnc.h>
+// #include <mvnc.h>
 #include "SegmentationFreeRecognizer.h"
 #include "Pipeline.h"
 #include "PlateInfo.h"
@@ -49,6 +49,9 @@ namespace lpr_ncs {
     //image buffer
     float* imageBufFP32Ptr_fine;
     float* imageBufFP32Ptr_det;
+
+    std::string model_path;
+
 
     class LPR_NCS {
     public:

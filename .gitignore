@@ -4,3 +4,4 @@ bag/
 build/
 devel/
 cmake-build-debug/
+*.bag

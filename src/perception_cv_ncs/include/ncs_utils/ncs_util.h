@@ -19,12 +19,12 @@
 #include <cv_bridge/cv_bridge.h>
 #include "Pipeline.h"
 
-#include <mvnc.h>
+// #include <mvnc.h>
 #include <opencv2/freetype.hpp>
 #include "CvxText.hpp"
 
 
-
+/*
 extern bool g_graph_Success;
 extern ncStatus_t retCodeDet;
 extern ncStatus_t retCodeFine;
@@ -45,6 +45,9 @@ extern struct ncFifoHandle_t* inFifoHandlePtr_fine;
 extern struct ncFifoHandle_t* outFifoHandlePtr_fine;
 extern struct ncFifoHandle_t* inFifoHandlePtr_det;
 extern struct ncFifoHandle_t* outFifoHandlePtr_det;
+ */
+
+
 
 extern int numClasses_;
 extern float det_threshold;
@@ -95,7 +98,7 @@ extern void *LoadFile(const char *path, unsigned int *length);
 extern float *LoadImage32(unsigned char *img, int target_w, int target_h, int ori_w, int ori_h, float *mean, unsigned int* bufSize);
 
 extern inline int judgeCharRange(int id);
-extern void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame);
+extern void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, cv::Mat &out_frame, std::string model_path);
 extern std::pair<std::string,float> decodeLPRResults(cv::Mat code_table,std::vector<std::string> mapping_table,float thres);
 
 extern void lpr_result_process(float *output, cv::Mat &code_table);

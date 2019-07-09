@@ -6,16 +6,16 @@
   <arg name="launch_prefix" default=""/>
 
   <!-- graph folder. -->
-  <arg name="graph_path"  default="$(find lpr_ncs2)/graph"/>
+  <arg name="model_path"  default="$(find lpr_ncs2)/model/"/>
 
   <!-- Load parameters -->
-  <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/ros.yaml"/>
+  <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/base_config.yaml"/>
   <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/cameraParams.yaml"/>
-  <rosparam command="load" ns="lpr_ncs2" file="$(find lpr_ncs2)/config/backbone_graph.yaml"/>
+
 
   <!--node pkg="ssddetect" type="ssddetect" name="ssddetect" output="screen" launch-prefix="$(arg launch_prefix) gdb -ex run"-->
   <node pkg="lpr_ncs2" type="lpr_ncs2" name="lpr_ncs2" output="screen" launch-prefix="$(arg launch_prefix)">
-    <param name="graph_path"          value="$(arg graph_path)" />
+    <param name="model_path"          value="$(arg model_path)" />
   </node>
 
 </launch>

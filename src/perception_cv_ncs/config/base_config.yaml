@@ -1,3 +1,9 @@
+topics:
+  camera_receive: 
+    topic: /camera/image
+  camera_result:
+    topic: /camera/lpr_out
+
 backbone_graph:
   graph_file:
     det_graph_name: lpr_ncs_v2.graph
