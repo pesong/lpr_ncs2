@@ -25,12 +25,12 @@ namespace lpr_ncs {
          */
 
     }
-    
-    pr::PipelinePR prc(model_path + "/" + "cascade.xml",
-                        model_path + "/" + "HorizonalFinemapping.prototxt",
-                        model_path + "/" + "HorizonalFinemapping.caffemodel",
-                        model_path + "/" + "SegmenationFree-Inception.prototxt",
-                        model_path + "/" + "SegmenationFree-Inception.caffemodel"
+    std::string caffe_model_path = "/home/pesong/catkin_ws/src/lpr_ncs2/src/perception_cv_ncs/model";
+    pr::PipelinePR prc(caffe_model_path + "/" + "cascade.xml",
+                        caffe_model_path + "/" + "HorizonalFinemapping.prototxt",
+                        caffe_model_path + "/" + "HorizonalFinemapping.caffemodel",
+                        caffe_model_path + "/" + "SegmenationFree-Inception.prototxt",
+                        caffe_model_path + "/" + "SegmenationFree-Inception.caffemodel"
     );
 
     // init ros node

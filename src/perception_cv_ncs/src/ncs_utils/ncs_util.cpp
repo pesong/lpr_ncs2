@@ -267,8 +267,7 @@ void show_lpr_result(cv::Mat frame, std::vector<pr::PlateInfo> &res, float th, c
 //    cv::Ptr<cv::freetype::FreeType2> ft2 = cv::freetype::createFreeType2();
 //    ft2 = cv::freetype::createFreeType2();
 //    ft2->loadFontData( "./MSYH.TTF", 0 );
-    const char *font_path_str = (model_path + "/" + "SimHei.ttf").c_str();
-    CvxText text(font_path_str);
+    CvxText text(font_path.c_str("/home/pesong/catkin_ws/src/lpr_ncs2/src/perception_cv_ncs/model/SimHei.ttf"));
     cv::Scalar size1{ 100, 0.5, 0.1, 0 }, size2{ 100, 0, 0.1, 0 }, size3{ 50, 0, 1, 0 }, size4{25, 0, 0.2, 0};
     text.setFont(nullptr, &size4, nullptr, 0);
 
